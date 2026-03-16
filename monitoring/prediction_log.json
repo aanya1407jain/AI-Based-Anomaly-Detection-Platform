@@ -1,0 +1,16 @@
+[
+    {
+        "time": "2026-03-16 20:39:24.874090",
+        "cpu_usage": 70.0,
+        "memory_usage": 60.0,
+        "disk_io": 50.0,
+        "prediction": "NORMAL"
+    },
+    {
+        "time": "2026-03-16 20:40:26.229081",
+        "cpu_usage": 1000.0,
+        "memory_usage": 5000.0,
+        "disk_io": 2500.0,
+        "prediction": "ANOMALY"
+    }
+]

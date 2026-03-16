@@ -1,39 +1,52 @@
-🤖 AI-Based System Anomaly Detection
-📌 Overview
+AI-Based Anomaly Detection Platform
 
-This project implements an AI-powered system monitoring tool that detects abnormal behavior in system resources such as CPU usage, memory usage, and disk I/O. It uses machine learning to learn normal system patterns and identify unusual activity that may indicate performance issues or system faults.
+An AI-powered anomaly detection system that identifies unusual patterns in datasets and real-time system metrics using machine learning.
+The platform allows users to upload datasets or monitor system resources (CPU, Memory, Disk) to detect anomalies.
 
-The system collects real-time system metrics, trains an anomaly detection model, and exposes a REST API for predicting whether the current system state is normal or anomalous.
+Built using Python, Streamlit, and Isolation Forest, this project demonstrates how AI can be applied for data monitoring, system health analysis, and anomaly detection.
 
-🚀 Features
+Features
 
-Real-time system metric collection
+• Upload CSV or Excel datasets for anomaly detection
+• Automatically works with any numeric columns
+• Detects normal vs anomalous data points
+• Shows detected anomalies separately
+• Displays recent prediction logs
+• Real-time system metrics monitoring
+• Download prediction results as CSV
+• Interactive Streamlit web interface
 
-Machine learning based anomaly detection
-
-REST API for predictions
-
-Automated testing script
-
-Prediction logging system
-
-Easy integration with monitoring tools
-
-🧠 Machine Learning Model
-
-This project uses IsolationForest from scikit-learn.
-
-Isolation Forest detects anomalies by isolating unusual data points from normal patterns. If a system metric significantly differs from normal behavior learned during training, it is classified as an anomaly.
-
-🛠️ Tech Stack
+Tech Stack
 
 Python
 
-FastAPI – API backend
+Streamlit
 
-scikit-learn – Machine learning
+Scikit-learn
 
-📂 Project Structure
+Pandas
+
+NumPy
+
+Joblib
+
+Psutil
+
+Machine Learning Model
+
+The project uses Isolation Forest, an unsupervised machine learning algorithm designed for anomaly detection.
+
+Isolation Forest works by:
+
+Randomly selecting features
+
+Splitting data points
+
+Isolating rare patterns faster than normal data
+
+Anomalies are detected based on how easily they can be isolated from the dataset.
+
+Project Structure
 
 AI-Anomaly-Detection
 │
@@ -41,27 +54,58 @@ AI-Anomaly-Detection
 │   └── app.py                # FastAPI server
 │
 ├── data
-│   ├── collect_metrics.py    # Collect real system metrics
-│   └── system_metrics.csv    # Dataset
+│   ├── collect_metrics.py    # Script to collect system metrics
+│   └── system_metrics.csv    # Dataset for training
 │
 ├── model
 │   ├── train_model.py        # Train anomaly detection model
-│   └── anomaly_model.pkl     # Saved model
+│   └── anomaly_model.pkl     # Saved ML model
 │
 ├── tester
-│   └── tester.py             # Script to test API
+│   └── tester.py             # Script to test API endpoints
 │
 ├── logs
 │   └── prediction_log.json   # Stores prediction logs
 │
+├── streamlit_app.py          # Main Streamlit application
+│
+├── requirements.txt
 └── README.md
 
-⚙️ Installation
+How It Works
+Dataset Anomaly Detection
+
+User uploads a CSV or Excel file.
+
+Numeric columns are automatically extracted.
+
+Isolation Forest is trained on the uploaded data.
+
+Each record is labeled as:
+
+NORMAL
+ANOMALY
+
+Results are displayed and can be downloaded.
+
+Real-Time System Monitoring
+
+The application collects:
+
+CPU usage
+
+Memory usage
+
+Disk usage
+
+These metrics are passed to the trained anomaly detection model to predict whether the system behavior is normal or anomalous.
+
+Installation
 
 Clone the repository:
 
-git clone https://github.com/your-username/AI-Anomaly-Detection.git
-cd AI-Anomaly-Detection
+git clone https://github.com/aanya1407jain/AI-Based-Anomaly-Detection-Platform.git
+cd AI-Based-Anomaly-Detection-Platform
 
 Create virtual environment:
 
@@ -75,87 +119,38 @@ Windows
 
 Install dependencies:
 
-pip install fastapi uvicorn scikit-learn pandas psutil requests
-📊 Collect System Data
+pip install -r requirements.txt
+Running the Application
 
-Generate system metrics dataset:
+Start the Streamlit app:
 
-python data/collect_metrics.py
+streamlit run streamlit_app.py
 
-This will create:
+The application will open at:
 
-data/system_metrics.csv
-🧠 Train the Model
+http://localhost:8501
+Example Workflow
 
-Train the anomaly detection model:
+1️⃣ Upload a dataset
+2️⃣ Click Predict Anomaly
+3️⃣ View detected anomalies
+4️⃣ Download prediction results
 
-python model/train_model.py
+OR
 
-This creates:
+Click Use Current CPU, Memory & Disk to analyze real-time system metrics.
 
-model/anomaly_model.pkl
-🌐 Run the API
+Future Improvements
 
-Start the API server:
+• Image/Screenshot anomaly detection
+• Time-series anomaly detection
+• Real-time monitoring dashboard
+• Cloud deployment
+• Alert system for anomalies
 
-uvicorn api.app:app --reload
+Author
 
-Open API documentation:
+Aanya Jain
 
-http://127.0.0.1:8000/docs
-📡 Example Prediction Request
-
-Input:
-
-cpu_usage = 70
-memory_usage = 60
-disk_io = 50
-
-Output:
-
-{
-  "cpu_usage": 70,
-  "memory_usage": 60,
-  "disk_io": 50,
-  "prediction": "NORMAL"
-}
-
-If the system behavior is unusual:
-
-{
-  "prediction": "ANOMALY"
-}
-🧪 Testing the API
-
-Run the testing script:
-
-python tester/tester.py
-
-This sends multiple requests to the API and prints anomaly detection results.
-
-🎯 Use Cases
-
-Server performance monitoring
-
-Detecting unusual system activity
-
-Infrastructure monitoring tools
-
-AI-powered system health analysis
-
-📌 Future Improvements
-
-Real-time monitoring dashboard
-
-Alert system for anomalies
-
-Visualization of system metrics
-
-Integration with cloud monitoring tools
-
-✅ Project Goal:
-Demonstrate how machine learning can be integrated with system monitoring to automatically detect abnormal system behavior.
-
-psutil – System metrics collection
-
-Uvicorn – API server
+GitHub
+https://github.com/aanya1407jain
